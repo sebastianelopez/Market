@@ -1,0 +1,67 @@
+﻿@model IEnumerable<Final.Models.Category>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Categorias</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.name)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.name)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.categoryId">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.categoryId">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.categoryId">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section Scripts{
+    <script type="text/javascript">
+
+        function openSuccessModal(strMessage) {
+        var myDiv = document.getElementById('MyModalSuccessAlertBody');
+
+        myDiv.innerHTML = strMessage;
+        $('#myModalSuccess').modal('show');
+        }
+
+        function openErrorModal(strMessage) {
+            var myDiv2 = document.getElementById('MyModalErrorAlertBody');
+
+            myDiv2.innerHTML = strMessage;
+            $('#myModalError').modal('show');
+        }
+
+        $(document).ready(function () {
+            var msgSuccess = "@TempData["SuccessMessage"]";
+            var msgError = "@TempData["ErrorMessage"]";
+
+            if (msgSuccess) {
+                openSuccessModal(msgSuccess);
+            } else if (msgError) {
+                openErrorModal(msgError);
+            }
+         })
+
+    </script>
+}

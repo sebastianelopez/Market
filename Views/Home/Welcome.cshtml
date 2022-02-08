@@ -1,0 +1,14 @@
+﻿@model Final.Models.User
+
+@{
+    ViewData["Title"] = "Welcome";
+    ViewData["User"] = @Model.userId;
+}
+
+
+<h3>Bienvenido @Model.name</h3>
+     
+<br>
+<a asp-controller="Products" asp-action="UserView" asp-route-id="@Model.userId">Continuar</a>
+
+

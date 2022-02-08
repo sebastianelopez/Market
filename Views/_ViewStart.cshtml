@@ -1,0 +1,18 @@
+﻿@{
+    if (!(
+        ViewContext.ViewBag.Title ==
+            "NoLayout" || ViewContext.ViewBag.Title == "NoLayoutAtAll"
+        ))
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+    else if (
+        ViewContext.ViewBag.Title ==
+            "NoLayout"
+        )
+    {
+        Layout = "~/Views/Shared/_NotLayout.cshtml";
+    }
+}
+
+

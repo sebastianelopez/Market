@@ -1,0 +1,103 @@
+﻿@model IEnumerable<Final.Models.Log>
+
+@{
+    ViewData["Title"] = "Logs";
+}
+
+<h1>Logs</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.eventType)
+            </th>
+            <th>
+                Evento
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.user.name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.createdAt)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.eventType)
+                </td>
+                <td>
+                    @switch (item.eventType)
+                    {
+                        case 1:
+                            <b>Login</b>
+                            break;
+                        case 2:
+                            <b>Nueva Compra</b>
+                            break;
+                        case 3:
+                            <b>Compra rechazada</b>
+                            break;
+                        case 4:
+                            <b>Producto sin Stock</b>
+                            break;
+                        case 5:
+                            <b>Usuario Agregado</b>
+                            break;
+                        case 6:
+                            <b>Producto Agregado</b>
+                            break;
+                        default:
+                            // code block
+                            break;
+                    }
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.user.name)                   
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.createdAt)
+                </td>
+                <td>
+                    <a asp-action="Delete" asp-route-id="@item.logId">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section Scripts{
+    <script type="text/javascript">
+
+        function openSuccessModal(strMessage) {
+        var myDiv = document.getElementById('MyModalSuccessAlertBody');
+
+        myDiv.innerHTML = strMessage;
+        $('#myModalSuccess').modal('show');
+        }
+
+        function openErrorModal(strMessage) {
+            var myDiv2 = document.getElementById('MyModalErrorAlertBody');
+
+            myDiv2.innerHTML = strMessage;
+            $('#myModalError').modal('show');
+        }
+
+        $(document).ready(function () {
+            var msgSuccess = "@TempData["SuccessMessage"]";
+            var msgError = "@TempData["ErrorMessage"]";
+
+            if (msgSuccess) {
+                openSuccessModal(msgSuccess);
+            } else if (msgError) {
+                openErrorModal(msgError);
+            }
+         })
+
+    </script>
+}
